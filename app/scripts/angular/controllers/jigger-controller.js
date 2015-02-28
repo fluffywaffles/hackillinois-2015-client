@@ -15,6 +15,7 @@ angular.module('jig')
     }
   }
 
+  // NOTE(jordan): wait a few millis for the template to render
   setTimeout(function() {
     jiggerRigger.rig(angular.element('*[jig-placeholder],*[jig-text]'))
   }, 200);

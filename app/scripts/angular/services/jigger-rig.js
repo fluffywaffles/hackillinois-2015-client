@@ -32,8 +32,9 @@ angular.module('jig')
   this.open = function(ael) {
     var rig = _self.constructRig(ael.prev());
     ael.after(rig);
+    // wait for DOM to attach before animating
     setTimeout(function() {
       rig.addClass('anim').addClass('anim-open')
-    }, 500);
+    }, 100);
   }
 }]);
