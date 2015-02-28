@@ -27,9 +27,9 @@ html(lang='en')
     != "<![endif]-->"
 
     #jigger-doc
-      h1(jig-text) {{ bodyModel['h1.0.text'] }}
-      p(jig-text)  {{ bodyModel['p.0.text'] }}
-      input(type='text', ng-attr-placeholder='{{ bodyModel["input[text].0.placeholder"] }}', jig-placeholder)
+      h1(jiggerable, jig-text='h1.0.text') {{ bodyModel['h1.0.text'] }}
+      p(jiggerable, jig-text='p.0.text')  {{ bodyModel['p.0.text'] }}
+      input(type='text', ng-attr-placeholder='{{ bodyModel["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
