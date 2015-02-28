@@ -90,7 +90,7 @@ gulp.task('serve', ['jade', 'styles', 'fonts'], function () {
       notify: false,
       port: port,
       server: {
-        baseDir: '.tmp',
+        baseDir: ['app', '.tmp'],
         routes: {
           '/bower_components': 'bower_components'
         }
