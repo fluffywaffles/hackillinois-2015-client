@@ -6,6 +6,8 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
+var getPort = require('get-port');
+
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
     .pipe($.sourcemaps.init())
@@ -31,10 +33,16 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('html', ['styles'], function () {
+gulp.task('jade', function () {
+  return gulp.src('app/jade/**/*.jade')
+    .pipe($.jade({ pretty: true }))
+    .pipe(gulp.dest('.tmp'));
+});
+
+gulp.task('html', ['jade', 'styles'], function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
-  return gulp.src('app/*.html')
+  return gulp.src('.tmp/*.html')
     .pipe(assets)
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.csso()))
@@ -66,8 +74,7 @@ gulp.task('fonts', function () {
 
 gulp.task('extras', function () {
   return gulp.src([
-    'app/*.*',
-    '!app/*.html'
+    'app/*.*'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
@@ -75,26 +82,31 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], function () {
-  browserSync({
-    notify: false,
-    port: 9000,
-    server: {
-      baseDir: ['.tmp', 'app'],
-      routes: {
-        '/bower_components': 'bower_components'
+gulp.task('serve', ['jade', 'styles', 'fonts'], function () {
+
+  getPort(function(err, port) {
+    if(err) return console.log(err);
+    browserSync({
+      notify: false,
+      port: port,
+      server: {
+        baseDir: '.tmp',
+        routes: {
+          '/bower_components': 'bower_components'
+        }
       }
-    }
+    });
   });
 
   // watch for changes
   gulp.watch([
-    'app/*.html',
+    '.tmp/*.html',
     'app/scripts/**/*.js',
     'app/images/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
+  gulp.watch('app/jade/**/*.jade', ['jade']);
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
