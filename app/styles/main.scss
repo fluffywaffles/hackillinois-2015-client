@@ -50,6 +50,8 @@ div[jig-rig] {
   height: 0;
   opacity: 0;
 
+  display: inline-block; // NOTE(jordan): make margins apply
+
   margin: 0;
   padding: 0 20px;
 
@@ -60,10 +62,20 @@ div[jig-rig] {
   background: #777;
   box-shadow: inset 0px 3px 10px rgba(0,0,0,0.5);
 
+  overflow: hidden;
+
+  * {
+    display: none;
+  }
+
   &.anim.anim-open {
     height: 100px;
     opacity: 1;
     margin: 20px 0;
     padding: 20px 20px;
+
+    * {
+      display: block;
+    }
   }
 }

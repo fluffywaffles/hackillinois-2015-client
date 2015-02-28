@@ -20,16 +20,16 @@ html(lang='en')
 
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
 
-  body(ng-app='jig')
+  body(ng-app='jig', ng-controller='jigger-controller')
     != "<!--[if lt IE 10]>"
     p.browsehappy
     | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
     != "<![endif]-->"
 
-    #jigger-doc(ng-controller='jigger-controller')
+    #jigger-doc
       h1(jig-text) {{ bodyModel['h1.0.text'] }}
       p(jig-text)  {{ bodyModel['p.0.text'] }}
-      input(type='text', placeholder='{{ bodyModel["input[text].0.placeholder"] }}', jig-placeholder)
+      input(type='text', ng-attr-placeholder='{{ bodyModel["input[text].0.placeholder"] }}', jig-placeholder)
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.

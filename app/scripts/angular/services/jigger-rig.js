@@ -6,11 +6,13 @@ angular.module('jig')
   this.baseEditBlock = function() { return angular.element('<input type="text">'); }
   this.baseEditBlock.model = function(el, prop) {
     var tag = el.prop('tagName').toLowerCase();
-    var modelKey = [tag, angular.element(tag).index(el), prop].join('.');
+    var type = tag == 'input' && el.attr('type') ? '[' + el.attr('type') + ']' : '';
+    var modelKey = [tag + type, angular.element(tag).index(el), prop].join('.');
     var editBlock = _self.baseEditBlock()
                       .attr('value', prop == 'text' ? el.text() : el.attr(prop));
-/*    $rootScope.$watch(editBlock.value,
-                      $rootScope.bodyModelUpdater($rootScope.bodyModel[modelKey]));*/
+    console.log($rootScope);
+    editBlock.on('input',
+                 $rootScope.bodyModelUpdater(modelKey));
     return editBlock;
   }
 
@@ -32,6 +34,6 @@ angular.module('jig')
     ael.after(rig);
     setTimeout(function() {
       rig.addClass('anim').addClass('anim-open')
-    }, 200);
+    }, 500);
   }
 }]);
