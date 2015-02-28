@@ -18,7 +18,7 @@ html(lang='en')
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
-  body
+  body(ng-app='jig')
     != "<!--[if lt IE 10]>"
     p.browsehappy
     | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
@@ -43,6 +43,7 @@ html(lang='en')
     // build:js scripts/vendor.js
     // bower:js
     script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/angular/angular.js')
     // endbower
     // endbuild
 
