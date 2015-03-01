@@ -19,7 +19,7 @@ angular.module('jig')
     editBtn.click($scope.beginEditing);
   };
 
-  jiggerFactory.generateDoc('http://nuvc.nuisepic.com')
+  jiggerFactory.generateDoc('https://www.bloc.io/')
   .done(function( data ) {
     console.log(data);
     $scope.$apply(function() {

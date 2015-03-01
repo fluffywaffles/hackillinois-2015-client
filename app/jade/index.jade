@@ -18,6 +18,9 @@ html(lang='en')
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
+    div(ng-repeat='css in doc.deps.external')
+      link(rel='stylesheet', href='//{{css}}')
+
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
 
   body(ng-app='jig', ng-controller='jigger-controller')
