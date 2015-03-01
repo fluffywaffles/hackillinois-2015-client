@@ -33,12 +33,9 @@ body {
 
 // NOTE(jordan): this could def. cause layout breakage in more complex sites
 .jigger-rigged {
-  width: auto;
-  float: left;
-  clear: left;
+  display: inline-block;
 
   &+.jigger-edit {
-    float: left;
     position: relative;
     padding: 0 10px;
 
@@ -51,20 +48,20 @@ body {
   }
 }
 
-div[jig-rig] {
+jig-rig {
   clear: both;
   width: 100%;
   max-height: 0;
   opacity: 0;
 
-  display: inline-block; // NOTE(jordan): make margins apply
+  display: block; // NOTE(jordan): make margins apply
 
   margin: 0;
   padding: 0 20px;
 
   box-sizing: border-box;
 
-  transition: max-height 1s ease, opacity 1s ease, margin 1s ease, padding 1s ease;
+  transition: max-height 1s ease, opacity 0.5s ease, margin 1s ease, padding 1s ease;
 
   background: #777;
   box-shadow: inset 0px 3px 10px rgba(0,0,0,0.5);
@@ -72,9 +69,10 @@ div[jig-rig] {
   overflow: hidden;
 
   * {
+    position: relative;
     max-height: 0;
 
-    transition: max-height 1s ease;
+    transition: max-height 0.5s ease;
   }
 
   &.anim.anim-open {
@@ -85,6 +83,26 @@ div[jig-rig] {
 
     * {
       max-height: 9999px;
+      display: inline;
     }
+  }
+
+  input[type="text"] {
+    width: calc(100% - 44px);
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+  }
+
+  button {
+    position: relative;
+    top: 2px;
+    padding: 2px 6px;
+    background-color: rgb(88, 196, 30);
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px darken(white, 40%);
   }
 }

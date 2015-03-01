@@ -1,5 +1,5 @@
 angular.module('jig')
-.controller('jigger-controller', ['$rootScope', '$scope', 'jigger-factory',  'jigger-rigger', function($rootScope, $scope, jiggerFactory, jiggerRigger) {
+.controller('jigger-controller', ['$rootScope', '$scope', 'jigger-factory',  'jigger-rigger', 'jig-util', function($rootScope, $scope, jiggerFactory, jiggerRigger, jigUtil) {
   // NOTE(jordan): must track: underlying body model, currently edited field, various others
   $rootScope.bodyModel = {
     'h1.0.text': 'Hello!',
@@ -16,11 +16,16 @@ angular.module('jig')
   }
 
   $scope.dismiss = function(e) {
-    console.log(e);
+    var ael = angular.element(e.target);
+    var editBtn = ael.parent().removeClass('anim-open').removeClass('anim')
+                     .prev().removeClass('hide');
+    editBtn.click(function(e) {
+      var ael = angular.element(e.target);
+      ael.next().addClass('anim').addClass('anim-open');
+      ael.addClass('hide');
+    });
   }
 
-  // NOTE(jordan): wait a few millis for the template to render
-  setTimeout(function() {
-    jiggerRigger.rig(angular.element('*[jig-placeholder],*[jig-text]'))
-  }, 200);
+  $scope.modelKeys = {};
+
 }]);
