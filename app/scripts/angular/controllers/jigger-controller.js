@@ -1,5 +1,5 @@
 angular.module('jig')
-.controller('jigger-controller', ['$scope', 'jigger-factory', '$sce', '$compile', function($scope, jiggerFactory, $sce, $compile) {
+.controller('jigger-controller', ['$scope', 'jigger-factory', '$sce', '$compile', 'localStorageService', function($scope, jiggerFactory, $sce, $compile, localStorage) {
 
   $scope.beginEditing = function(e) {
     var ael = angular.element(e.target);
@@ -19,9 +19,13 @@ angular.module('jig')
     editBtn.click($scope.beginEditing);
   };
 
-  jiggerFactory.generateDoc('https://www.bloc.io/')
+  //http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/
+  $scope.currentUrl = 'http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/';
+
+  jiggerFactory.generateDoc($scope.currentUrl)
   .done(function( data ) {
     console.log(data);
+    localStorage.bind($scope, 'doc', data, $scope.currentUrl);
     $scope.$apply(function() {
       $scope.doc = data;
       $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
