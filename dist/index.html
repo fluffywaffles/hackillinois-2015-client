@@ -1,0 +1,10 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta name=description content="Jig - jigger your static site content"> <meta name=viewport content="width=device-width, initial-scale=1"> <title>Jig</title>  <link rel=stylesheet href=styles/vendor.css>   <script src=/bower_components/jquery/dist/jquery.js></script> <script src=/bower_components/angular/angular.js></script>   <script src=scripts/app.js></script> <link rel=stylesheet href=styles/main.css> <div ng-repeat="css in doc.deps.css.external"> <link rel=stylesheet ng-href=//{{::css}}> </div> <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css> </head> <body ng-app=jig ng-controller=jigger-controller><!--[if lt IE 10]>
+    <p class="browsehappy"></p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.<![endif]--> <div ng-repeat="js in doc.deps.js.external"> <script ng-src-unsafe=//{{::js}}></script> </div> <div ng-repeat="js in doc.deps.js.inline"> <script ng-bind=::js></script> </div> <style ng-repeat="css in doc.deps.css.inline">{{ ::css }}</style> <div class=jig-top-bar> <label>I want to go to there:</label> <input type=text ng-value=currentUrl> <button ng-click=switchSite($event)>GO</button> </div> <div id=jigger-doc ng-bind-html=doc.body></div>  <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+      
+    </script> <script src=scripts/vendor.js></script> <script src=scripts/main.js></script> </body> </html>
