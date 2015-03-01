@@ -4,7 +4,7 @@ angular.module('jig')
     restrict: 'A',
     transclude: true,
     scope: true,
-    template: '<ng-transclude ng-bind="textContent()"></ng-transclude>',
+    template: '<ng-transclude></ng-transclude>',
     link: function ($scope, $element, $attrs) {
       var tagIndex = jigUtil.modelKeyIndex($element, $scope.doc.body.valueOf());
       $scope.modelKeys[tagIndex] = [];
