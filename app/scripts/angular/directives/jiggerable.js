@@ -3,10 +3,14 @@ angular.module('jig')
   return {
     restrict: 'A',
     transclude: true,
-    template: '<ng-transclude>',
+    template: '<ng-transclude ng-bind="textContent()"></ng-transclude>',
     link: function ($scope, $element, $attrs) {
       var tagIndex = jigUtil.modelKeyIndex($element, $scope.doc.body.valueOf());
       $scope.modelKeys[tagIndex] = [];
+
+      $scope.textContent = function() {
+        return $scope.doc.model[tagIndex + '.text'];
+      }
 
       angular.forEach(Object.keys($attrs).filter(function (attr) {
         return attr.indexOf('jig') == 0 && attr != 'jiggerable';
