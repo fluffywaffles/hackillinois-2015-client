@@ -5,7 +5,7 @@ angular.module('jig')
     transclude: true,
     template: '<ng-transclude>',
     link: function ($scope, $element, $attrs) {
-      var tagIndex = jigUtil.modelKeyIndex($element);
+      var tagIndex = jigUtil.modelKeyIndex($element, $scope.doc.body.valueOf());
       $scope.modelKeys[tagIndex] = [];
 
       angular.forEach(Object.keys($attrs).filter(function (attr) {
@@ -18,14 +18,15 @@ angular.module('jig')
       $element.addClass('jigger-rigged');
 
       $element.after($compile('<jig-rig>')($scope));
-      $element.after('<i class="fa fa-pencil jigger-edit"></i>');
-      $element.next().click(function (e) {
+      var editBtn = angular.element('<i class="fa fa-pencil jigger-edit"></i>');
+      editBtn.click(function (e) {
         // NOTE(jordan): this piece of crap is outside of $scope so... fuck
         var ael = angular.element(e.target);
         ael.next().addClass('anim').addClass('anim-open');
         ael.off('click');
         ael.addClass('hide');
       });
+      $element.after(editBtn);
     }
   };
 }]);

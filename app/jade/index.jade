@@ -26,10 +26,13 @@ html(lang='en')
     | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
     != "<![endif]-->"
 
-    #jigger-doc
-      h1(jiggerable, jig-text='h1.0.text') {{ bodyModel['h1.0.text'] }}
-      p(jiggerable, jig-text='p.0.text')  {{ bodyModel['p.0.text'] }}
-      input(type='text', ng-attr-placeholder='{{ bodyModel["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
+    //#jigger-doc(ng-bind-html-unsafe="{{ doc.body }}")
+      h1(jiggerable, jig-text='h1.0.text') {{ doc.model['h1.0.text'] }}
+      p(jiggerable, jig-text='p.0.text')  {{ doc.model['p.0.text'] }}
+      input(type='text', ng-attr-placeholder='{{ doc.model["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
+    style(ng-repeat='css in doc.deps.inline') {{ css }}
+
+    #jigger-doc(ng-bind-html="doc.body")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
@@ -54,8 +57,6 @@ html(lang='en')
     script(src='scripts/angular/directives/jig-edit.js')
     script(src='scripts/angular/directives/jiggerable.js')
     script(src='scripts/angular/services/jigger-factory.js')
-    script(src='scripts/angular/services/jigger-rig.js')
-    script(src='scripts/angular/services/jigger-rigger.js')
     script(src='scripts/angular/controllers/jigger-controller.js')
     // endbuild
 

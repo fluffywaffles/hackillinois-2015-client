@@ -1,11 +1,15 @@
 angular.module('jig')
-.controller('jigger-controller', ['$scope', 'jigger-factory', function($scope, jiggerFactory) {
-  // NOTE(jordan): must track: underlying body model, currently edited field, various others
-  $scope.bodyModel = {
-    'h1.0.text': 'Hello!',
-    'p.0.text': 'This is some basic filler text...',
-    'input[text].0.placeholder': 'put stuff here!'
-  };
+.controller('jigger-controller', ['$scope', 'jigger-factory', '$sce', '$compile', function($scope, jiggerFactory, $sce, $compile) {
+  jiggerFactory.generateDoc('http://nuvc.nuisepic.com/')
+  .done(function( data ) {
+    console.log(data);
+    $scope.$apply(function() {
+      $scope.doc = data;
+      $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
+    });
+    var doc = angular.element('#jigger-doc');
+    doc.html($compile(doc.contents())($scope));
+  });
 
   $scope.dismiss = function(e) {
     // TODO(jordan): modularize this ugly set of operations

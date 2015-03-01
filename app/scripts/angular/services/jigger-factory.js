@@ -2,14 +2,18 @@ angular.module('jig')
 .factory('jigger-factory', ['$http', function($http) {
   var root = {};
 
-  root.appRootURI = 'jig.herokuapp.com/jigger/';
+  root.appRootURI = 'http://jig.herokuapp.com/';
 
   root.requestDoc = function(docId) {
-    return $http.get(root.appRootURI + docId);
+    return $.get(root.appRootURI + docId);
   };
 
   root.generateDoc = function(url) {
-    return $http.post(root.appRootURI, url);
+    // NOTE(jordan): angular doesn't use x-www-form-urlencoded by default; jquery does
+    return $.ajax({
+      type: 'POST',
+      url: root.appRootURI + 'jigger/',
+      data: {url: url}});
   };
 
   return root;

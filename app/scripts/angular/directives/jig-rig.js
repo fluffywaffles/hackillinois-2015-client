@@ -8,13 +8,11 @@ angular.module('jig')
       console.log('compile', $element);
       console.log('compile', $attrs);
     },*/
+    transclude: true,
     link: function($scope, $element, $attrs) {
-      console.log('rig', $element, $scope);
-      console.log($element.prev().prev());
       var parentJiggerable = $element.prev().prev();
       var modelKeyIndex = jigUtil.modelKeyIndex(parentJiggerable);
 
-      console.log(modelKeyIndex);
       $scope.modelKeys[modelKeyIndex].forEach(function(modelKey) {
         $element.prepend($compile('<jig-edit modelKey=' + modelKey + '>')($scope));
       });
