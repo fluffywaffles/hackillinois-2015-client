@@ -1,21 +1,14 @@
 angular.module('jig')
-.controller('jigger-controller', ['$rootScope', '$scope', 'jigger-factory',  'jigger-rigger', 'jig-util', function($rootScope, $scope, jiggerFactory, jiggerRigger, jigUtil) {
+.controller('jigger-controller', ['$scope', 'jigger-factory', function($scope, jiggerFactory) {
   // NOTE(jordan): must track: underlying body model, currently edited field, various others
-  $rootScope.bodyModel = {
+  $scope.bodyModel = {
     'h1.0.text': 'Hello!',
     'p.0.text': 'This is some basic filler text...',
     'input[text].0.placeholder': 'put stuff here!'
   };
 
-  $rootScope.bodyModelUpdater = function(key) {
-    return function(e) {
-      $rootScope.$apply(function () {
-        $rootScope.bodyModel[key] = e.target.value;
-      });
-    }
-  }
-
   $scope.dismiss = function(e) {
+    // TODO(jordan): modularize this ugly set of operations
     var ael = angular.element(e.target);
     var editBtn = ael.parent().removeClass('anim-open').removeClass('anim')
                      .prev().removeClass('hide');
