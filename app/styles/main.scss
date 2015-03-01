@@ -1,50 +1,22 @@
 // bower:scss
 // endbower
 
-body {
-  background: #fafafa;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
-  margin: 0;
-}
-
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-}
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
 // NOTE(jordan): this could def. cause layout breakage in more complex sites
 .jigger-rigged {
   display: inline-block;
+}
 
-  &+.jigger-edit {
-    position: relative;
-    padding: 0 10px;
+.jigger-edit {
+  position: relative;
+  padding: 0 10px;
 
-    transition: opacity 1s ease, height 1s ease;
+  font-size: 16px !important;
 
-    &.hide {
-      opacity: 0;
-      height: 0;
-    }
+  transition: opacity 1s ease, height 1s ease;
+
+  &.hide {
+    opacity: 0;
+    height: 0;
   }
 }
 
@@ -54,7 +26,7 @@ jig-rig {
   max-height: 0;
   opacity: 0;
 
-  display: block; // NOTE(jordan): make margins apply
+  display: block;
 
   margin: 0;
   padding: 0 20px;
@@ -88,7 +60,7 @@ jig-rig {
   }
 
   input[type="text"] {
-    width: calc(100% - 44px);
+    width: calc(100% - 48px);
     font-size: 16px;
     color: #333;
     padding: 5px;
