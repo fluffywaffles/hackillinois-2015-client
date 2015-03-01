@@ -11,6 +11,7 @@ angular.module('jig')
     transclude: true,
     link: function($scope, $element, $attrs) {
       var parentJiggerable = $element.prev().prev();
+      if(!parentJiggerable.prop('tagName')) return;
       var modelKeyIndex = jigUtil.modelKeyIndex(parentJiggerable);
 
       $scope.modelKeys[modelKeyIndex].forEach(function(modelKey) {

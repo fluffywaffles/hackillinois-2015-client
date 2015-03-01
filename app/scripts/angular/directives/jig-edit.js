@@ -6,12 +6,8 @@ angular.module('jig')
     scope: true,
     link: function ($scope, $element, $attrs) {
       var modelkey = $attrs.modelkey.valueOf();
-      $scope.model = function() {
-          return $scope.modelKeys[modelkey.split('.')
-                                   .reverse()
-                                   .slice(1)
-                                   .reverse()
-                                   .join('.')]
+      $scope.modelKey = function() {
+        return modelkey;
       }
     }
   }

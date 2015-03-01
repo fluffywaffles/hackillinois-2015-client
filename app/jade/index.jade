@@ -32,7 +32,7 @@ html(lang='en')
       input(type='text', ng-attr-placeholder='{{ doc.model["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
     style(ng-repeat='css in doc.deps.inline') {{ css }}
 
-    #jigger-doc(ng-bind-html="doc.body")
+    #jigger-doc(ng-bind-html='doc.body')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
