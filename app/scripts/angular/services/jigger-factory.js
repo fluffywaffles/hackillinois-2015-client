@@ -2,7 +2,7 @@ angular.module('jig')
 .factory('jigger-factory', ['$http', function($http) {
   var root = {};
 
-  root.appRootURI = 'http://jig.herokuapp.com/';
+  root.appRootURI = 'http://localhost:3000/';//'http://jig.herokuapp.com/';
 
   root.generateDoc = function(url) {
     // NOTE(jordan): angular doesn't use x-www-form-urlencoded by default; jquery does

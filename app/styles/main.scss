@@ -1,6 +1,10 @@
 // bower:scss
 // endbower
 
+.contact h2 {
+  color: #333;
+}
+
 // NOTE(jordan): this could def. cause layout breakage in more complex sites
 .jigger-rigged {
   display: inline-block;
@@ -10,6 +14,8 @@
   position: relative;
   display: inline-block;
   padding: 0 10px;
+
+  color: orange;
 
   font-size: 16px !important;
 
