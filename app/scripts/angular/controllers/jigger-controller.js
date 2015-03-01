@@ -19,7 +19,7 @@ angular.module('jig')
     editBtn.click($scope.beginEditing);
   };
 
-  jiggerFactory.generateDoc('https://www.bloc.io/')
+  jiggerFactory.generateDoc('https://bloc.io')
   .done(function( data ) {
     console.log(data);
     $scope.$apply(function() {

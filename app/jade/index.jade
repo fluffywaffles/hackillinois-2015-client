@@ -14,38 +14,6 @@ html(lang='en')
     // endbower
     // endbuild
 
-    // build:css styles/main.css
-    link(rel='stylesheet', href='styles/main.css')
-    // endbuild
-
-    div(ng-repeat='css in doc.deps.external')
-      link(rel='stylesheet', href='//{{css}}')
-
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
-
-  body(ng-app='jig', ng-controller='jigger-controller')
-    != "<!--[if lt IE 10]>"
-    p.browsehappy
-    | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    != "<![endif]-->"
-
-    //#jigger-doc(ng-bind-html-unsafe="{{ doc.body }}")
-      h1(jiggerable, jig-text='h1.0.text') {{ doc.model['h1.0.text'] }}
-      p(jiggerable, jig-text='p.0.text')  {{ doc.model['p.0.text'] }}
-      input(type='text', ng-attr-placeholder='{{ doc.model["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
-    style(ng-repeat='css in doc.deps.inline') {{ css }}
-
-    #jigger-doc(ng-bind-html='doc.body')
-
-    // Google Analytics: change UA-XXXXX-X to be your site's ID.
-    script.
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-
     // build:js scripts/vendor.js
     // bower:js
     script(src='/bower_components/jquery/dist/jquery.js')
@@ -62,6 +30,40 @@ html(lang='en')
     script(src='scripts/angular/services/jigger-factory.js')
     script(src='scripts/angular/controllers/jigger-controller.js')
     // endbuild
+
+    // build:css styles/main.css
+    link(rel='stylesheet', href='styles/main.css')
+    // endbuild
+
+    div(ng-repeat='css in doc.deps.css.external')
+      link(rel='stylesheet', ng-href='//{{css}}')
+
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
+
+  body(ng-app='jig', ng-controller='jigger-controller')
+    != "<!--[if lt IE 10]>"
+    p.browsehappy
+    | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    != "<![endif]-->"
+
+    div(ng-repeat='js in doc.deps.js.external')
+      script(ng-src-unsafe='//{{js}}')
+    div(ng-repeat='js in doc.deps.js.inline')
+      script(ng-bind='::js')
+
+    style(ng-repeat='css in doc.deps.css.inline') {{ css }}
+
+    #jigger-doc(ng-bind-html='doc.body')
+
+    // Google Analytics: change UA-XXXXX-X to be your site's ID.
+    script.
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+
 
     // build:js scripts/main.js
     script(src='scripts/main.js')
