@@ -25,27 +25,39 @@ angular.module('jig')
   //http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/
   $scope.currentUrl = 'http://bettermotherfuckingwebsite.com';//'http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/';
 
-  jiggerFactory.generateDoc($scope.currentUrl)
-  .done(function( data ) {
+  $scope._genDoc = function(url) {
+    jiggerFactory.generateDoc(url)
+    .done(function( data ) {
 
-    $scope.doc = data;
-    $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
+      $scope.doc = data;
+      $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
 
-    //console.warn($localStorage[$scope.currentUrl]);
-    if($localStorage[$scope.currentUrl])
-      $scope.doc.model = $localStorage[$scope.currentUrl];
-    else
-      $localStorage[$scope.currentUrl] = $scope.doc.model;
+      //console.warn($localStorage[$scope.currentUrl]);
+      if($localStorage[$scope.currentUrl])
+        $scope.doc.model = $localStorage[$scope.currentUrl];
+      else
+        $localStorage[$scope.currentUrl] = $scope.doc.model;
 
-    $scope.$apply();
+      $scope.$apply();
 
-    $compile(angular.element('#jigger-doc').contents())($scope);
+      $compile(angular.element('#jigger-doc').contents())($scope);
 
-    $('.jigger-edit').click($scope.beginEditing);
-  });
+      $('.jigger-edit').click($scope.beginEditing);
+    });
+  };
+
+  if ($localStorage['jig-currentUrl'])
+    $scope.currentUrl = $localStorage['jig-currentUrl'];
+
+  $scope.switchSite = function($e) {
+    $scope.currentUrl = angular.element($e.target).prev().val();
+    $localStorage['jig-currentUrl'] = $scope.currentUrl;
+    $scope._genDoc($scope.currentUrl);
+  }
 
   $scope.modelKeys = {};
   $scope.compiled  = "loading...";
+  $scope._genDoc($scope.currentUrl);
 
 
 }]);

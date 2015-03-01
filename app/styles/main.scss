@@ -5,6 +5,53 @@
   color: #333;
 }
 
+.jig-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ccc;
+  height: 60px;
+  z-index: 9999;
+
+  label {
+    position: absolute;
+    top: 15px;
+    display: inline-block;
+    width: 28%;
+    text-align: right;
+  }
+  input {
+    position: absolute;
+    left: 28%;
+    top: 15px;
+    width: 50%;
+    margin-left: 10px;
+  }
+  button {
+    position: absolute;
+    left: 78%;
+    margin-left: 20px;
+    top: 12px;
+  }
+}
+
+button {
+  position: relative;
+  top: 2px;
+  padding: 2px 6px;
+  background-color: rgb(88, 196, 30);
+  border: none;
+  border-radius: 3px;
+  font-size: 20px;
+  color: white;
+  text-shadow: 1px 1px darken(white, 40%);
+}
+
+#jigger-doc {
+  margin-top: 60px;
+}
+
 // NOTE(jordan): this could def. cause layout breakage in more complex sites
 .jigger-rigged {
   display: inline-block;
@@ -78,15 +125,4 @@ jig-rig {
     border-radius: 2px;
   }
 
-  button {
-    position: relative;
-    top: 2px;
-    padding: 2px 6px;
-    background-color: rgb(88, 196, 30);
-    border: none;
-    border-radius: 3px;
-    font-size: 20px;
-    color: white;
-    text-shadow: 1px 1px darken(white, 40%);
-  }
 }

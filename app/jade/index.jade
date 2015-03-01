@@ -53,6 +53,11 @@ html(lang='en')
 
     style(ng-repeat='css in doc.deps.css.inline') {{ ::css }}
 
+    .jig-top-bar
+      label I want to go to there:
+      input(type='text', ng-value='currentUrl')
+      button(ng-click='switchSite($event)') GO
+
     #jigger-doc(ng-bind-html='doc.body')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
