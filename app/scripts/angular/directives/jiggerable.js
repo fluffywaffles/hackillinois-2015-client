@@ -10,7 +10,6 @@ angular.module('jig')
       $scope.modelKeys[tagIndex] = [];
 
       $scope.htmlContent = function () {
-        console.log($scope.doc.model[tagIndex + '.text']);
         return $sce.trustAsHtml($scope.doc.model[tagIndex + '.text']);
       }
 

@@ -3,7 +3,6 @@ angular.module('jig')
   var _self = this;
 
   this.modelKeyIndex = function (ael, doc) {
-    console.log(ael);
     var tag = ael.prop('tagName').toLowerCase();
     var type = tag == 'input' ? '[' + ael.attr('type') + ']' : '';
     var jigAttr = (ael.attr('jig-text') || ael.attr('jig-placeholder'));

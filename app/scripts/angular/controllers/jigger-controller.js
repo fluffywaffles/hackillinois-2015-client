@@ -4,7 +4,6 @@ angular.module('jig')
   $scope.beginEditing = function(e) {
     var ael = angular.element(e.target);
     var rig = ael.next('jig-rig');
-    console.log(rig);
     rig = rig.length > 0 ? rig : ael.parent().next('jig-rig');
     rig.addClass('anim anim-open');
     ael.addClass('hide');
@@ -20,7 +19,7 @@ angular.module('jig')
 
     console.warn('Update localstorage');
     $localStorage[$scope.currentUrl] = $scope.doc.model;
-    console.warn($localStorage[$scope.currentUrl]);
+    //console.warn($localStorage[$scope.currentUrl]);
   };
 
   //http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/
@@ -32,7 +31,7 @@ angular.module('jig')
     $scope.doc = data;
     $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
 
-    console.warn($localStorage[$scope.currentUrl]);
+    //console.warn($localStorage[$scope.currentUrl]);
     if($localStorage[$scope.currentUrl])
       $scope.doc.model = $localStorage[$scope.currentUrl];
     else
