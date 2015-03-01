@@ -1,5 +1,5 @@
 angular.module('jig')
-.controller('jigger-controller', ['$scope', 'jigger-factory', '$sce', '$compile', 'localStorageService', function($scope, jiggerFactory, $sce, $compile, localStorage) {
+.controller('jigger-controller', ['$scope', 'jigger-factory', '$sce', '$compile', '$localStorage', function($scope, jiggerFactory, $sce, $compile, $localStorage) {
 
   $scope.beginEditing = function(e) {
     var ael = angular.element(e.target);
@@ -17,19 +17,28 @@ angular.module('jig')
     var editBtn = ael.parent().removeClass('anim-open').removeClass('anim')
     .prev('.jigger-edit').removeClass('hide');
     editBtn.click($scope.beginEditing);
+
+    console.warn('Update localstorage');
+    $localStorage[$scope.currentUrl] = $scope.doc.model;
+    console.warn($localStorage[$scope.currentUrl]);
   };
 
   //http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/
-  $scope.currentUrl = 'http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/';
+  $scope.currentUrl = 'http://bettermotherfuckingwebsite.com';//'http://swirlycheetah.com/native-bind-once-in-angularjs-1-3/';
 
   jiggerFactory.generateDoc($scope.currentUrl)
   .done(function( data ) {
-    console.log(data);
-    localStorage.bind($scope, 'doc', data, $scope.currentUrl);
-    $scope.$apply(function() {
-      $scope.doc = data;
-      $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
-    });
+
+    $scope.doc = data;
+    $scope.doc.body = $sce.trustAsHtml($scope.doc.body);
+
+    console.warn($localStorage[$scope.currentUrl]);
+    if($localStorage[$scope.currentUrl])
+      $scope.doc.model = $localStorage[$scope.currentUrl];
+    else
+      $localStorage[$scope.currentUrl] = $scope.doc.model;
+
+    $scope.$apply();
 
     $compile(angular.element('#jigger-doc').contents())($scope);
 
@@ -38,5 +47,6 @@ angular.module('jig')
 
   $scope.modelKeys = {};
   $scope.compiled  = "loading...";
+
 
 }]);

@@ -36,7 +36,7 @@ html(lang='en')
     // endbuild
 
     div(ng-repeat='css in doc.deps.css.external')
-      link(rel='stylesheet', ng-href='//{{css}}')
+      link(rel='stylesheet', ng-href='//{{::css}}')
 
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
 
@@ -47,11 +47,11 @@ html(lang='en')
     != "<![endif]-->"
 
     div(ng-repeat='js in doc.deps.js.external')
-      script(ng-src-unsafe='//{{js}}')
+      script(ng-src-unsafe='//{{::js}}')
     div(ng-repeat='js in doc.deps.js.inline')
       script(ng-bind='::js')
 
-    style(ng-repeat='css in doc.deps.css.inline') {{ css }}
+    style(ng-repeat='css in doc.deps.css.inline') {{ ::css }}
 
     #jigger-doc(ng-bind-html='doc.body')
 
@@ -68,7 +68,7 @@ html(lang='en')
     // bower:js
     script(src='/bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/angular/angular.js')
-    script(src='bower_components/angular-local-storage/dist/angular-local-storage.js')
+    script(src='/bower_components/ngstorage/ngStorage.js')
     // endbower
     // endbuild
 
