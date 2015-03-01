@@ -14,12 +14,29 @@ html(lang='en')
     // endbower
     // endbuild
 
+    // build:js scripts/vendor.js
+    // bower:js
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/angular/angular.js')
+    // endbower
+    // endbuild
+
+    // build:js scripts/app.js
+    script(src='scripts/angular/jig.js')
+    script(src='scripts/angular/services/jig-util.js')
+    script(src='scripts/angular/directives/jig-rig.js')
+    script(src='scripts/angular/directives/jig-edit.js')
+    script(src='scripts/angular/directives/jiggerable.js')
+    script(src='scripts/angular/services/jigger-factory.js')
+    script(src='scripts/angular/controllers/jigger-controller.js')
+    // endbuild
+
     // build:css styles/main.css
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
-    div(ng-repeat='css in doc.deps.external')
-      link(rel='stylesheet', href='//{{css}}')
+    div(ng-repeat='css in doc.deps.css.external')
+      link(rel='stylesheet', ng-href='//{{css}}')
 
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css')
 
@@ -29,11 +46,12 @@ html(lang='en')
     | You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
     != "<![endif]-->"
 
-    //#jigger-doc(ng-bind-html-unsafe="{{ doc.body }}")
-      h1(jiggerable, jig-text='h1.0.text') {{ doc.model['h1.0.text'] }}
-      p(jiggerable, jig-text='p.0.text')  {{ doc.model['p.0.text'] }}
-      input(type='text', ng-attr-placeholder='{{ doc.model["input[text].0.placeholder"] }}', jiggerable, jig-placeholder='input[text].0.placeholder')
-    style(ng-repeat='css in doc.deps.inline') {{ css }}
+    div(ng-repeat='js in doc.deps.js.external')
+      script(ng-src-unsafe='//{{js}}')
+    div(ng-repeat='js in doc.deps.js.inline')
+      script(ng-bind='::js')
+
+    style(ng-repeat='css in doc.deps.css.inline') {{ css }}
 
     #jigger-doc(ng-bind-html='doc.body')
 
@@ -52,16 +70,6 @@ html(lang='en')
     script(src='/bower_components/angular/angular.js')
     script(src='bower_components/angular-local-storage/dist/angular-local-storage.js')
     // endbower
-    // endbuild
-
-    // build:js scripts/app.js
-    script(src='scripts/angular/jig.js')
-    script(src='scripts/angular/services/jig-util.js')
-    script(src='scripts/angular/directives/jig-rig.js')
-    script(src='scripts/angular/directives/jig-edit.js')
-    script(src='scripts/angular/directives/jiggerable.js')
-    script(src='scripts/angular/services/jigger-factory.js')
-    script(src='scripts/angular/controllers/jigger-controller.js')
     // endbuild
 
     // build:js scripts/main.js
